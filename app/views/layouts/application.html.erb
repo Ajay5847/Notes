@@ -18,9 +18,9 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   </head>
-
   <body>
     <main class="">
+      <%= render 'shared/flash' %>
       <%= yield %>
     </main>
   </body>
