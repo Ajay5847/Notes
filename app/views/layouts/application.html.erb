@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Notes" %></title>
+    <title><%= content_for(:title) || "Keep It Note" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%# <meta name="apple-mobile-web-app-capable" content="yes"> %>
     <%= csrf_meta_tags %>
@@ -10,9 +10,9 @@
     <%= yield :head %>
 
     <%# <link rel="manifest" href="/manifest.json"> %>
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="icon" href="/notes.png" type="image/png">
+    <link rel="icon" href="/notes.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/notes.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://use.fontawesome.com/releases/v6.4.2/css/all.css", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
@@ -21,7 +21,6 @@
 
   <body>
     <main class="">
-      <%= turbo_frame_tag "modal" %>
       <%= yield %>
     </main>
   </body>
