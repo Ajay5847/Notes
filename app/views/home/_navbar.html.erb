@@ -34,9 +34,9 @@
     <div class="px-2 w-full max-w-lg">
       <div class="max-h-screen overflow-y-auto bg-white rounded shadow-2xl" @click.outside="modal = null" @keydown.escape.window="modal = null">
         <div class="p-4 lg:px-6 flex items-center justify-between">
-          <i class="fi-icon-lock text-gray-700 lg:text-lg"></i>
+          <i class="fa-solid fa-lock text-gray-700 lg:text-lg"></i>
           <div class="mx-2 grow lg:text-xl font-bold text-gray-900" x-text="modal === modals.signup ? 'Signup' : 'Login'"></div>
-          <button class="lg:text-lg fi-icon-close hover:text-red-600" @click="modal = null"></button>
+          <button class="lg:text-lg fa-solid fa-x hover:text-red-600" @click="modal = null"></button>
         </div>
         <div x-show="modal === modals.signup">
           <%= form_with scope: :user, url: user_registration_path, class: 'p-4 lg:px-6 border-t' do |f| %>
@@ -52,11 +52,11 @@
               <%= f.label :password_confirmation, "Confirm Password", class: 'text-gray-900 text-lg font-medium' %>
               <%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'w-full form-input rounded-md mt-3' %>
             </div>
-            <%= f.button type: :submit, class: 'mt-4 btn btn-base w-full bg-forest-700 text-white justify-center', data: { disable_with: 'Please wait...' } do %>
+            <%= f.button type: :submit, class: 'mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full bg-forest-700 justify-center', data: { disable_with: 'Please wait...' } do %>
               <span>Sign Up</span>
-              <i class="ml-2 fi-icon-arrow-right"></i>
+              <i class="ml-2 fa-solid fa-arrow-right"></i>
             <% end %>
-            <div class="border-t p-4 lg:p-6">
+            <div class="border-t px-2 lg:px-4">
               <div class="mt-2 text-sm">
                 <span>Already have an account?</span>
                 <button class="font-medium text-gray-700" @click.prevent="modal = modals.login">Login</button>
@@ -74,11 +74,11 @@
               <%= f.label :password, "Password", class: 'text-gray-900 text-lg font-medium' %>
               <%= f.text_field :password, type: :password, placeholder: 'Password', class: 'w-full form-input rounded-md mt-3' %>
             </div>
-            <%= f.button type: :submit, class: 'mt-4 btn btn-base w-full bg-forest-700 text-white justify-center', data: { disable_with: 'Please wait...' } do %>
+            <%= f.button type: :submit, class: 'mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full bg-forest-700 justify-center', data: { disable_with: 'Please wait...' } do %>
               <span>Login</span>
-              <i class="ml-2 fi-icon-arrow-right"></i>
+              <i class="ml-2 fa-solid fa-arrow-right"></i>
             <% end %>
-            <div class="border-t p-4 lg:p-6">
+            <div class="border-t px-2 lg:px-4">
               <div class="mt-2 text-sm">
                 <span>Don’t have an account?</span>
                 <button class="font-medium text-gray-700" @click.prevent="modal = modals.signup">Sign Up</button>
@@ -96,8 +96,8 @@
               <%= f.label :email, "Email", class: 'text-gray-900 text-lg font-medium' %>
               <%= f.text_field :email, type: :email, placeholder: 'Email Address', class: 'mt-3 w-full form-input rounded-md' %>
             </div>
-            <%= f.button "Recover", type: :submit, class: 'mt-4 btn btn-base w-full bg-forest-700 text-white disabled:opacity-50 justify-center', data: { disable_with: 'Please wait...' } %>
-            <div class="border-t p-4 lg:p-6">
+            <%= f.button "Recover", type: :submit, class: 'mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full bg-forest-700 justify-center', data: { disable_with: 'Please wait...' } %>
+            <div class="border-t px-2 lg:px-4">
               <div class="mt-2 text-sm">
                 <span>Don’t have an account?</span>
                 <button class="font-medium text-gray-700" @click.prevent="modal = modals.signup">Sign Up</button>
