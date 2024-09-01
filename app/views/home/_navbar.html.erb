@@ -52,14 +52,14 @@
               <%= f.label :password_confirmation, "Confirm Password", class: 'text-gray-900 text-lg font-medium' %>
               <%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'w-full form-input rounded-md mt-3' %>
             </div>
-            <%= f.button type: :submit, class: 'mt-4 btn btn-base w-full bg-acai-700 text-white justify-center', data: { disable_with: 'Please wait...' } do %>
+            <%= f.button type: :submit, class: 'mt-4 btn btn-base w-full bg-forest-700 text-white justify-center', data: { disable_with: 'Please wait...' } do %>
               <span>Sign Up</span>
               <i class="ml-2 fi-icon-arrow-right"></i>
             <% end %>
             <div class="border-t p-4 lg:p-6">
               <div class="mt-2 text-sm">
                 <span>Already have an account?</span>
-                <button class="font-medium text-gray-700" @click="modal = modals.login">Login</button>
+                <button class="font-medium text-gray-700" @click.prevent="modal = modals.login">Login</button>
               </div>
             </div>
           <% end %>
@@ -74,18 +74,18 @@
               <%= f.label :password, "Password", class: 'text-gray-900 text-lg font-medium' %>
               <%= f.text_field :password, type: :password, placeholder: 'Password', class: 'w-full form-input rounded-md mt-3' %>
             </div>
-            <%= f.button type: :submit, class: 'mt-4 btn btn-base w-full bg-acai-700 text-white justify-center', data: { disable_with: 'Please wait...' } do %>
+            <%= f.button type: :submit, class: 'mt-4 btn btn-base w-full bg-forest-700 text-white justify-center', data: { disable_with: 'Please wait...' } do %>
               <span>Login</span>
               <i class="ml-2 fi-icon-arrow-right"></i>
             <% end %>
             <div class="border-t p-4 lg:p-6">
               <div class="mt-2 text-sm">
                 <span>Don’t have an account?</span>
-                <button class="font-medium text-gray-700" @click="modal = modals.signup">Sign Up</button>
+                <button class="font-medium text-gray-700" @click.prevent="modal = modals.signup">Sign Up</button>
               </div>
               <div class="mt-2 text-sm">
                 <span>Forget Password?</span>
-                <button class="font-medium text-gray-700" @click="modal = modals.recover">Recover</button>
+                <button class="font-medium text-gray-700" @click.prevent="modal = modals.recover">Recover</button>
               </div>
             </div>
           <% end %>
@@ -96,15 +96,15 @@
               <%= f.label :email, "Email", class: 'text-gray-900 text-lg font-medium' %>
               <%= f.text_field :email, type: :email, placeholder: 'Email Address', class: 'mt-3 w-full form-input rounded-md' %>
             </div>
-            <%= f.button "Recover", type: :submit, class: 'mt-4 btn btn-base w-full bg-acai-700 text-white disabled:opacity-50 justify-center', data: { disable_with: 'Please wait...' } %>
+            <%= f.button "Recover", type: :submit, class: 'mt-4 btn btn-base w-full bg-forest-700 text-white disabled:opacity-50 justify-center', data: { disable_with: 'Please wait...' } %>
             <div class="border-t p-4 lg:p-6">
               <div class="mt-2 text-sm">
                 <span>Don’t have an account?</span>
-                <button class="font-medium text-gray-700" @click="modal = modals.signup">Sign Up</button>
+                <button class="font-medium text-gray-700" @click.prevent="modal = modals.signup">Sign Up</button>
               </div>
               <div class="mt-2 text-sm">
                 <span>Already an existing user?</span>
-                <button class="font-medium text-gray-700" @click="modal = modals.login">Login</button>
+                <button class="font-medium text-gray-700" @click.prevent="modal = modals.login">Login</button>
               </div>
             </div>
           <% end %>
