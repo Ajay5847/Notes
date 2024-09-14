@@ -3,7 +3,5 @@ class NotesController < ApplicationController
 
   def index
     @notes = Note.order(created_at: :desc)
-
-    flash[:notice] = "Hey Jay"
   end
 end

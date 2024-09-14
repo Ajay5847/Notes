@@ -21,6 +21,9 @@
   <body>
     <main class="">
       <%= render 'shared/flash' %>
+      <% if user_signed_in? %>
+        <%= render 'shared/header' %>
+      <% end %>
       <%= yield %>
     </main>
   </body>
