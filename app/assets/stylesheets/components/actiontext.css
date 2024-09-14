@@ -29,3 +29,15 @@
   padding: 0 !important;
   max-width: 100% !important;
 }
+
+.trix-button--icon-strike,
+.trix-button--icon-link,
+.trix-button-group--block-tools,
+.trix-button-group--file-tools,
+.trix-button-group--history-tools {
+  display: none;
+}
+
+.trix-button {
+  background-image: none !important;
+}

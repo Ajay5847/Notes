@@ -19,12 +19,16 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <main class="">
-      <%= render 'shared/flash' %>
-      <% if user_signed_in? %>
-        <%= render 'shared/header' %>
-      <% end %>
-      <%= yield %>
-    </main>
+    <div class="relative text-gray-700 flex flex-col h-screen overflow-y-hidden">
+      <div class="grow flex flex-row-reverse overflow-hidden">
+        <div class="grow overflow-y-auto scroller">
+          <%= render 'shared/flash' %>
+          <% if user_signed_in? %>
+            <%= render 'shared/header' %>
+          <% end %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
