@@ -1,25 +1,31 @@
-<div x-data="{ editing: false }" class="max-w-sm p-4 bg-white border border-gray-300 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out cursor-pointer">
+<div x-data="{ editing: false }" class="">
   <!-- View Mode (Note Content) -->
-  <div x-show="!editing">
-    <%= note&.content %>
-    <div class="mt-2 flex justify-end">
-      <button @click.prevent="editing = true" class="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none">
-        Edit
-      </button>
-    </div>
+  <div x-show="!editing" class="p-4 pr-14 bg-gray-200 text-sm font-medium text-gray-800 mt-5 relative rounded-lg break-words assignment-trix turbo-linkify">
+    <% if note.content.present? %>
+      <%= note&.content %>
+    <% else%>
+      <p class="text-sm text-gray-600">Enter your Note...</p>
+    <% end %>
+    <button @click.prevent="editing = true" class="inline-flex gap-x-2 text-sm text-center px-4 py-0 rounded items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 h-6 transition ease duration-300 hover:cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed focus:outline-none focus:ring-2 bg-green-700 hover:bg-green-800 transition-all shadow hover:shadow-md text-white focus:ring-green-200 absolute top-4 right-2">
+      <i class="mr-1 <%= note ? 'fa-solid fa-pen-to-square' : 'fa-solid fa-plus' %>"></i>
+      <%= note ? "Edit" : "Add Answer" %>
+    </button>
   </div>
 
   <!-- Edit Mode (Form) -->
-  <div x-show="editing" class="mt-4">
+  <div x-show="editing" class="mt-4 p-4 bg-gray-200 rounded-md">
     <%= form_for(note, url: '#', method: :patch, class: 'break-words') do |f| %>
-        <div class="trix-container">
-          <%= f.rich_text_area :content, id: note.id, data: { controller: "trix" } %>
-        </div>
-        <div class="flex justify-end mt-2">
-          <button @click.prevent="editing = false" type="button" class="mr-2 px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none">
-            Cancel
+      <div class="relative">
+        <%= f.rich_text_area :content, id: note.id, class: "w-full max-w-full min-h-40 rounded-md border border-gray-400 trix-content pr-24" %> <!-- Adjusted width -->
+        <div class="absolute right-2 top-[78%] md:top-[70%] flex flex-col gap-2 flex-shrink-0 transform -translate-y-1/2">
+          <%= button_tag(type: 'submit', class: 'inline-flex gap-x-2 text-sm text-center px-4 py-0 rounded items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 h-6 transition ease duration-300 hover:cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed bg-green-700 text-white hover:bg-green-800 justify-center', name: 'submit', value: "submit") do %>
+            <i class="fa-solid fa-check"></i>
+            <span>Submit</span>
+          <% end %>
+          <button @click.prevent="editing = false" type="button" class="inline-flex gap-x-2 text-sm text-center px-4 py-0 rounded items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 h-6 transition ease duration-300 hover:cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed bg-green-700 text-white hover:bg-green-800 justify-center">
+            <i class="fa-solid fa-x"></i>
+            <span>Cancel</span>
           </button>
-          <%= f.submit 'Save', class: 'px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none' %>
         </div>
       </div>
     <% end %>
