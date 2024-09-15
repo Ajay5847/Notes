@@ -1,28 +1,52 @@
-<div x-data="{ editing: false }" class="">
+<div id="<%= dom_id(note) %>" x-data="{ editing: false }" class="">
+  <%
+    new_note = note.new_record?
+    if new_note
+      submit_path = notes_path
+      submit_method = :post
+    else
+      submit_path = note_path(note)
+      submit_method = :patch
+    end
+  %>
   <!-- View Mode (Note Content) -->
   <div x-show="!editing" class="p-4 pr-14 bg-gray-200 text-sm font-medium text-gray-800 mt-5 relative rounded-lg break-words assignment-trix turbo-linkify">
-    <% if note.content.present? %>
-      <%= note&.content %>
-    <% else%>
-      <p class="text-sm text-gray-600">Enter your Note...</p>
+    <% if new_note || !note.content.present? %>
+      <p class="text-sm text-gray-600">Enter your thoughts...</p>
+    <% else %>
+      <h3 class="text-lg font-bold mb-2"><%= note&.title %></h3>
+      <div class="prose prose-sm">
+        <%= note&.content %>
+      </div>
     <% end %>
     <button @click.prevent="editing = true" class="inline-flex gap-x-2 text-sm text-center px-4 py-0 rounded items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 h-6 transition ease duration-300 hover:cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed focus:outline-none focus:ring-2 bg-green-700 hover:bg-green-800 transition-all shadow hover:shadow-md text-white focus:ring-green-200 absolute top-4 right-2">
-      <i class="mr-1 <%= note ? 'fa-solid fa-pen-to-square' : 'fa-solid fa-plus' %>"></i>
-      <%= note ? "Edit" : "Add Answer" %>
+      <i class="mr-1 <%= new_note ? 'fa-solid fa-plus' : 'fa-solid fa-pen-to-square' %>"></i>
+      <%= new_note ? "Add" : "Edit" %>
     </button>
   </div>
 
   <!-- Edit Mode (Form) -->
   <div x-show="editing" class="mt-4 p-4 bg-gray-200 rounded-md">
-    <%= form_for(note, url: '#', method: :patch, class: 'break-words') do |f| %>
-      <div class="relative">
-        <%= f.rich_text_area :content, id: note.id, class: "w-full max-w-full min-h-40 rounded-md border border-gray-400 trix-content pr-24" %> <!-- Adjusted width -->
+    <%= form_for(note, url: submit_path, method: submit_method, class: 'break-words') do |f| %>
+      <div class="mb-4">
+        <%= f.label :title, "Title", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :title, class: "w-full max-w-full mt-1 p-2 text-base rounded-md border border-gray-400" %>
+      </div>   
+      <div class="relative prose lg:prose-lg prose-a:underline prose-a:text-acai-800 prose-h2:tracking-tight prose-strong:text-gray-800 prose-h2:font-semibold prose-h3:font-semibold max-w-full">
+        <%= f.rich_text_area :content, id: note.id, class: "w-full max-w-full min-h-40 p-2 rounded-md border border-gray-400 trix-content pr-24" %>
         <div class="absolute right-2 top-[78%] md:top-[70%] flex flex-col gap-2 flex-shrink-0 transform -translate-y-1/2">
-          <%= button_tag(type: 'submit', class: 'inline-flex gap-x-2 text-sm text-center px-4 py-0 rounded items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 h-6 transition ease duration-300 hover:cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed bg-green-700 text-white hover:bg-green-800 justify-center', name: 'submit', value: "submit") do %>
-            <i class="fa-solid fa-check"></i>
-            <span>Submit</span>
+          <% if new_note %>
+            <%= button_tag(type: 'submit', class: 'inline-flex gap-x-2 text-sm text-center px-4 py-0 rounded items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 h-6 transition ease duration-300 hover:cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed bg-green-700 text-white hover:bg-green-800 justify-center', name: 'submit', value: "submit") do %>
+              <i class="fa-solid fa-check"></i>
+              <span>Submit</span>
+            <% end %>
+          <% else %>
+            <%= button_tag(type: 'submit', class: 'inline-flex gap-x-2 text-sm text-center px-4 py-0 rounded items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 h-6 transition ease duration-300 hover:cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed bg-green-700 text-white hover:bg-green-800 justify-center', name: 'update', value: "update") do %>
+              <i class="fa-solid fa-check"></i>
+              <span>Update</span>
+            <% end %>
           <% end %>
-          <button @click.prevent="editing = false" type="button" class="inline-flex gap-x-2 text-sm text-center px-4 py-0 rounded items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 h-6 transition ease duration-300 hover:cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed bg-green-700 text-white hover:bg-green-800 justify-center">
+          <button @click.prevent="editing = false" type="button" class="inline-flex gap-x-2 text-sm text-center px-4 py-0 rounded items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 h-6 transition ease duration-300 hover:cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed bg-blue-500 text-white hover:bg-blue-800 justify-center">
             <i class="fa-solid fa-x"></i>
             <span>Cancel</span>
           </button>
