@@ -1,13 +1,13 @@
 class NotesController < ApplicationController
   before_action :login_required
-  before_action :fetch_note, except: :index
+  before_action :fetch_note, except: %i[index create]
 
   def index
     @notes = Note.order(created_at: :desc)
   end
 
   def create
-    @note = Note.create(note_params)
+    @note = current_user.notes.create(note_params)
   end
 
   def edit

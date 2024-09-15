@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "new_note" do %>
+  <%= render 'note', note: Note.new %>
+<% end %>
+<%= turbo_stream.prepend "notes_list" do %>
+  <%= render 'note', note: @note %>
+<% end %>

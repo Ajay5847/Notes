@@ -12,5 +12,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :notes
-  root "home#index"
+
+  authenticated :user do
+    root "notes#index", as: :authenticated_root
+  end
+
+  unauthenticated do
+    root "home#index", as: :unauthenticated_root
+  end
 end
