@@ -4,6 +4,8 @@ class NotesController < ApplicationController
 
   def index
     @notes = Note.order(created_at: :desc)
+    @pinned_notes = @notes.pinned
+    @notes = @notes.where(pinned: false)
   end
 
   def create
@@ -24,6 +26,6 @@ private
   end
 
   def note_params
-    params.require(:note).permit(:title, :content)
+    params.require(:note).permit(:title, :content, :color, :pinned)
   end
 end
